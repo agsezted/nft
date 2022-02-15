@@ -1,0 +1,302 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body{
+    font-family: 'Open Sans', sans-serif;
+    background: url(img/fopndopared.jpg);
+    background: -webkit-linear-gradient(to center, hsla(212, 100%, 80%, 0.253), hsla(219, 41%, 13%, 0.377)), url(../imagenes/fopndo\ pared.jpg);
+    /* Chrome 10-25, Safari 5.1-6 */
+    background: linear-gradient(to right, hsla(212, 100%, 80%, 0.253), hsla(219, 41%, 13%, 0.377)), url(../imagenes/fopndo\ pared.jpg); 
+    /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */;
+    background-size: cover;
+    background-attachment: fixed;
+    position: relative;
+}
+.button{
+    color: aqua;
+    background-color: #010203;
+    margin: 0 0 0 49%;
+    padding-top: center;
+}
+#video, video{
+    margin: auto;
+    padding-top: 40px;
+}
+.contenedor{
+    padding: 10px 0;
+    width: 100%;
+}
+.titulo{
+    display: flex;
+    color: blueviolet;
+    font-size: 50px;
+    text-align: center;
+    align-items: center;
+    padding-bottom: 50px;
+    justify-content: center;
+    margin-bottom: 20px;
+}
+    
+    
+/*header*/
+header{
+    width: 100%;
+    height: 600px;
+    background: #141E30; 
+    /* fallback for old browsers */
+    background: -webkit-linear-gradient(to right, hsla(212, 100%, 80%, 0.253), hsla(219, 41%, 13%, 0.377)), url(../imagenes/fopndo\ pared.jpg);
+    /* Chrome 10-25, Safari 5.1-6 */
+    background: linear-gradient(to right, hsla(212, 100%, 80%, 0.253), hsla(219, 41%, 13%, 0.377)), url(../imagenes/fopndo\ pared.jpg); 
+    /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */;
+    background-size: cover;
+    background-attachment: fixed;
+    position: relative;
+}
+nav{
+    text-align: right;
+    padding: 5px 30px 0 0;
+}
+nav > a{
+color: antiquewhite;
+font-weight: 300;
+text-decoration: none;
+font-size: 20px;
+margin-right: 50px;
+
+}
+nav > a:hover{
+    color: rgb(240, 138, 4);
+    text-decoration: solid;
+    }
+    header .textos-header{
+        display: flex;
+        height: 430px;
+        width: 100%;
+        align-items: center;
+        justify-content: center;
+        flex-direction: column;
+        text-align: center;
+    }
+    .textos-header h1{
+        font-size: 50px;
+        color: antiquewhite;
+    }
+    .textos-header h2{
+        font-size: 20px;
+        color: antiquewhite;
+        font-weight: 300;
+        text-align: center;
+
+    }
+    /*About us*/
+    .contenedor-sobre-nosotros{
+        display: flex;
+        justify-content: space-evenly;
+        width: 100%;
+    height: 600px;
+}
+.imagen-about-us{
+    width: 48%;
+}
+.sobre-nosotros .contenido-textos{
+    width: 48%;
+}
+.contenido-textos h3{
+    margin-bottom: 15px;
+    color: aliceblue;
+}
+.contenido-textos h3 span{
+    background-color: rgb(145, 11, 163);
+    color: aliceblue;
+    border-radius: 50%;
+    display: inline-block;
+    text-align: center;
+    width: 30px;
+    height: 30px;
+    padding: 2px;
+    box-shadow: 0 0 6px 0 rgba(0 , 0, 0, 0.5);
+    margin-bottom: 5px;
+}
+.contenido-textos p{
+    padding: 0px 0px 30px 15px;
+    font-weight: 300;
+    text-align: justify;
+    color: aliceblue;
+}
+/*galeria*/
+.NFT´s{
+    display: flex;
+    
+}
+.galeria-port{
+    display: flex;
+    justify-content: space-evenly;
+    flex-wrap: wrap;
+}
+.imagen-port{
+    width: 24%;
+    margin-bottom: 20px;
+    height: 200px;
+    overflow: hidden;
+    position: relative;
+    cursor: pointer;
+    box-shadow: 0 0 6px 0 rgba(0 , 0, 0, 0.5);
+}
+.imagen-port > img{
+width: 100%;
+height: 100%;
+object-fit: cover;
+display: block;
+}
+.hover-galeria{
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    transform: scale(1);
+    background: -webkit-linear-gradient(to center, hsla(212, 100%, 80%, 0.253), hsla(219, 41%, 13%, 0.377)), url(../imagenes/fopndo\ pared.jpg);
+    /* Chrome 10-25, Safari 5.1-6 */
+    background: linear-gradient(to right, hsla(212, 100%, 80%, 0.253), hsla(219, 41%, 13%, 0.377)), url(../imagenes/fopndo\ pared.jpg); 
+    /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */;
+    transition: trasnform .1s;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+.hover-galeria img{
+width: 200px;
+height: 200px;
+}
+.hover-galeria p{
+    
+    font-size: 35px;
+    background-color: hsl(33, 100%, 50%);
+    color: #010002f8;
+}
+.imagen-port:hover .hover-galeria{
+transform: scale(0);
+}
+/*cliente*/
+.cards{
+    display: flex;
+    justify-content: space-evenly;
+    
+}
+.cards .card{
+    display: flex;
+    width: 70%;
+    height: 200px;
+    align-items: center;
+    justify-content: space-evenly;
+    border-radius: 5px;
+    box-shadow: 0 0 6px 0 rgba(0 , 0, 0, 0.6);
+    
+}
+.cards .card img{
+    width: 100px;
+    height: 100px;
+    object-fit: cover;
+    border: 10px;
+    border-radius: 40%;
+    display: block;
+}
+.cards .card > .contenido-texto-card{
+    width: 70%;
+    color: aliceblue;
+}
+.cards .card > .contenido-texto-card p{
+ font-weight: 100;
+ padding-top: 10px;
+}
+/*tecnologias*/
+.tecnologias{
+    display: flex;
+    width: 60%;
+    height: 200px;
+    margin-bottom: 20px;
+    justify-content: space-evenly;
+    padding: 20px;
+    align-items: center;
+    border-radius: 5px;
+    box-shadow: 0 0 6px 0 rgba(0 , 0, 0, 0.6);
+    
+}
+
+/*footer*/
+footer{
+    width: 100%;
+    padding: 50px 0px;
+    background-image: url(../imagenes/ );
+    background-size: cover;
+    
+}
+
+.container__footer{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    max-width: 900px;
+    margin: auto;
+    margin-top: 100px;
+}
+
+.box__footer{
+    display: flex;
+    flex-direction: column;
+    padding: 20px;
+}
+
+.box__footer .logo img{
+    width: 100px;
+}
+
+.box__footer .terms{
+    max-width: 350px;
+    margin-top: 20px;
+    font-weight: 500;
+    color: #7a7a7a;
+    font-size: 18px;
+}
+
+.box__footer h2{
+    margin-bottom: 20px;
+    color: #ffffff;
+    font-weight: 700;
+}
+
+.box__footer a{
+    margin-top: 10px;
+    color: #7a7a7a;
+    font-weight: 600;
+}
+
+.box__footer a:hover{
+    opacity: 0.8;
+}
+
+.box__footer a .fab{
+    font-size: 5px;
+    
+}
+
+.box__copyright{
+    max-width: 1200px;
+    margin: auto;
+    text-align: center;
+    padding: 0px 40px;
+}
+
+.box__copyright p{
+    margin-top: 20px;
+    color: #7a7a7a;
+}
+
+.box__copyright hr{
+    border: none;
+    height: 1px;
+    background-color: #7a7a7a;
+}
