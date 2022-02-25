@@ -15,6 +15,12 @@ body{
     background-attachment: fixed;
     position: relative;
 }
+.contenedor1{
+ width: 100%;
+ max-width: 1000px;
+ padding: 20px;
+ margin: auto;
+}
 .contenedor{
     padding: 10px 0;
     width: 100%;
@@ -70,6 +76,14 @@ nav > a:hover{
         flex-direction: column;
         text-align: center;
     }
+    .textos-header video{
+        width: 300px;
+        
+    }
+    .textos-header h3{
+        font-size: 20px;
+        color: #ffffff;
+    }
     .textos-header h1{
         font-size: 50px;
         color: antiquewhite;
@@ -86,7 +100,7 @@ nav > a:hover{
         display: flex;
         justify-content: space-evenly;
         width: 100%;
-    height: 600px;
+    height: 700px;
 }
 .imagen-about-us{
     width: 48%;
@@ -119,12 +133,12 @@ nav > a:hover{
 /*galeria*/
 .NFT´s{
     display: flex;
-    
 }
 .galeria-port{
     display: flex;
     justify-content: space-evenly;
     flex-wrap: wrap;
+    height: 500px;
 }
 .imagen-port{
     width: 24%;
@@ -136,8 +150,8 @@ nav > a:hover{
     box-shadow: 0 0 6px 0 rgba(0 , 0, 0, 0.5);
 }
 .imagen-port > img{
-width: 100%;
-height: 100%;
+width: 95%;
+height: 300px;
 object-fit: cover;
 display: block;
 }
@@ -158,7 +172,7 @@ display: block;
     flex-direction: column;
 }
 .hover-galeria img{
-width: 200px;
+width: 300px;
 height: 200px;
 }
 .hover-galeria p{
@@ -170,11 +184,18 @@ height: 200px;
 .imagen-port:hover .hover-galeria{
 transform: scale(0);
 }
+.galeria-port h5{
+    color: #ffffff;
+    font-size: 20px;
+}
 /*cliente*/
 .cards{
     display: flex;
-    justify-content: space-evenly;
-    
+    justify-content: center;
+    height: 250px;
+    width: 100%;
+    box-sizing: border-box;
+    margin-top: 50px;
 }
 .cards .card{
     display: flex;
@@ -183,15 +204,15 @@ transform: scale(0);
     align-items: center;
     justify-content: space-evenly;
     border-radius: 5px;
-    box-shadow: 0 0 6px 0 rgba(0 , 0, 0, 0.6);
+    box-shadow: 0 0 15px 0 rgba(0 , 0, 0, 0.6);
     
 }
 .cards .card img{
     width: 100px;
-    height: 100px;
+    height: auto;
     object-fit: cover;
-    border: 10px;
-    border-radius: 40%;
+    border: 30px;
+    border-radius: 60%;
     display: block;
 }
 .cards .card > .contenido-texto-card{
@@ -202,17 +223,44 @@ transform: scale(0);
  font-weight: 100;
  padding-top: 10px;
 }
+
+ .salo{
+    display: flex;
+    width: 70%;
+    height: 200px;
+    align-items: center;
+    justify-content: space-evenly;
+    border-radius: 5px;
+    box-shadow: 0 0 15px 0 rgba(0 , 0, 0, 0.6);
+}
+.salo img{
+    width: 100px;
+    height: auto;
+    object-fit: cover;
+    border: 30px;
+    border-radius: 60%;
+    display: block;
+}
+ .salo > .contenido-texto-card{
+    width: 70%;
+    color: aliceblue;
+}
+ .salo > .contenido-texto-card p{
+    font-weight: 100;
+    padding-top: 9px;
+}
 /*tecnologias*/
 .tecnologias{
     display: flex;
-    width: 60%;
+    width: 70%;
     height: 200px;
-    margin-bottom: 20px;
+    margin-bottom: 30px;
     justify-content: space-evenly;
-    padding: 20px;
     align-items: center;
-    border-radius: 5px;
-    box-shadow: 0 0 6px 0 rgba(0 , 0, 0, 0.6);
+    border-radius: 50px;
+    box-shadow: 0 0 15px 0 rgba(0 , 0, 0, 0.6);
+    flex-direction: column;
+    box-sizing: border-box;
     
 }
 
@@ -289,4 +337,332 @@ footer{
     border: none;
     height: 1px;
     background-color: #7a7a7a;
+}
+
+@media screen and (max-width: 480px) {
+    *{
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+    }
+    
+    body{
+        font-family: 'Open Sans', sans-serif;
+        background: url(img/fopndopared.jpg);
+        background: -webkit-linear-gradient(to center, hsla(212, 100%, 80%, 0.253), hsla(219, 41%, 13%, 0.377)), url(../imagenes/fopndo\ pared.jpg);
+        
+        background: linear-gradient(to right, hsla(212, 100%, 80%, 0.253), hsla(219, 41%, 13%, 0.377)), url(../imagenes/fopndo\ pared.jpg); 
+        background-size: cover;
+        background-attachment: fixed;
+        position: relative;
+    }
+    .contenedor1{
+     width: 100%;
+     max-width: 1000px;
+     padding: 20px;
+     margin: auto;
+    }
+    .contenedor{
+        padding: 10px 0;
+        width: 100%;
+    }
+    .titulo{
+        display: flex;
+        color: blueviolet;
+        font-size: 50px;
+        text-align: center;
+        align-items: center;
+        padding-bottom: 50px;
+        justify-content: center;
+        margin-bottom: 20px;
+    }
+        
+        
+    /*header*/
+    header{
+        width: 100%;
+        height: 600px;
+        background: #141E30; 
+        
+        background: -webkit-linear-gradient(to right, hsla(212, 100%, 80%, 0.253), hsla(219, 41%, 13%, 0.377)), url(../imagenes/fopndo\ pared.jpg);
+        
+        background: linear-gradient(to right, hsla(212, 100%, 80%, 0.253), hsla(219, 41%, 13%, 0.377)), url(../imagenes/fopndo\ pared.jpg); 
+        
+        background-size: cover;
+        background-attachment: fixed;
+        position: relative;
+    }
+    nav{
+        text-align: right;
+        padding: 15px 10px 0 0;
+    }
+    nav > a{
+    color: antiquewhite;
+    font-weight: 400;
+    text-decoration: none;
+    font-size: 9px;
+    margin-right: 20px;
+    
+    }
+    nav > a:hover{
+        color: rgb(240, 138, 4);
+        text-decoration: solid;
+        }
+        header .textos-header{
+            display: flex;
+            height: 400px;
+            width: 100%;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+            text-align: center;
+        }
+        .textos-header h1{
+            font-size: 50px;
+            color: antiquewhite;
+        }
+        .textos-header h2{
+            font-size: 20px;
+            color: antiquewhite;
+            font-weight: 300;
+            text-align: center;
+    
+        }
+        
+        .contenedor-sobre-nosotros{
+            display: flex;
+            justify-content: space-evenly;
+            width: 100%;
+        height: 700px;
+    }
+    .imagen-about-us{
+        width: 200px;
+        height: 200px;
+        position: relative;
+    }
+    .sobre-nosotros .contenido-textos{
+        width: 100%;
+    }
+    .contenido-textos h3{
+        margin-bottom: 10px;
+        color: aliceblue;
+        font-size: 12px;
+    }
+    .contenido-textos h3 span{
+        background-color: rgb(145, 11, 163);
+        color: aliceblue;
+        border-radius: 50%;
+        display: inline-block;
+        text-align: center;
+        width: 15px;
+        height: 20px;
+        padding: 2px;
+        box-shadow: 0 0 6px 0 rgba(0 , 0, 0, 0.5);
+        margin-bottom: 5px;
+    }
+    .contenido-textos p{
+        padding: 0px 0px 30px 15px;
+        font-weight: 300;
+        text-align: justify;
+        color: aliceblue;
+        font-size: 8px;
+    }
+    
+    .NFT´s{
+        display: flex;
+    }
+    .galeria-port{
+        display: flex;
+        justify-content: space-evenly;
+        flex-wrap: wrap;
+        height: 300px;
+    }
+    .imagen-port{
+        width: 24%;
+        margin-bottom: 20px;
+        height: 100px;
+        overflow: hidden;
+        position: relative;
+        cursor: pointer;
+        box-shadow: 0 0 6px 0 rgba(0 , 0, 0, 0.5);
+    }
+    .imagen-port > img{
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    }
+    .hover-galeria{
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        top: 0;
+        transform: scale(1);
+        background: -webkit-linear-gradient(to center, hsla(212, 100%, 80%, 0.253), hsla(219, 41%, 13%, 0.377)), url(../imagenes/fopndo\ pared.jpg);
+        
+        background: linear-gradient(to right, hsla(212, 100%, 80%, 0.253), hsla(219, 41%, 13%, 0.377)), url(../imagenes/fopndo\ pared.jpg); 
+       
+        transition: trasnform .1s;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+    }
+    .hover-galeria img{
+    width: 100%;
+    height: 100%;
+    }
+    .hover-galeria p{
+        
+        font-size: 30px;
+        background-color: hsl(33, 100%, 50%);
+        color: #fffffff8;
+    }
+    .imagen-port:hover .hover-galeria{
+    transform: scale(0);
+    }
+    .galeria-port h5{
+        color: #ffffff;
+        font-size: 10px;
+    }
+    
+    .cards{
+        display: flex;
+        justify-content: center;
+        height: 300px;
+        width: 100%;
+        box-sizing: border-box;
+        margin-top: 20px;
+    }
+    .cards .card{
+        display: flex;
+        width: 70%;
+        height: 120px;
+        align-items: center;
+        justify-content: space-evenly;
+        border-radius: 5px;
+        box-shadow: 0 0 15px 0 rgba(0 , 0, 0, 0.6);
+        margin: 5px;
+        
+    }
+    .cards .card img{
+        width: 35px;
+        height: auto;
+        object-fit: cover;
+        border: 50px;
+        border-radius: 100%;
+        display: block;
+    }
+    .cards .card > .contenido-texto-card{
+        width: 70%;
+        color: aliceblue;
+        font-size: 7px;
+    }
+    .cards .card > .contenido-texto-card p{
+     font-weight: 100;
+     padding-top: 10px;
+    }
+    
+    .tecnologias{
+        display: flex;
+        width: 150px;
+        height: 100px;
+        margin-bottom: 30px;
+        justify-content: space-evenly;
+        align-items: center;
+        border-radius: 50px;
+        box-shadow: 0 0 15px 0 rgba(0 , 0, 0, 0.6);
+        flex-direction: column;
+        
+        
+    }
+    .tecnologias img{
+        height: 50px;
+        width: 100px;
+        justify-content: space-evenly;
+        align-items: center;
+        flex-direction: column;
+    }
+    
+    
+    footer{
+        width: 100%;
+        padding: 10px 0px;
+        background-image: url(../imagenes/ );
+        background-size: cover;
+        
+    }
+    
+    .container__footer{
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-between;
+        max-width: 400px;
+        margin: auto;
+        margin-top: 2px;
+    }
+    
+    .box__footer{
+        display: flex;
+        flex-direction: column;
+        padding: 5px;
+    }
+    
+    .box__footer .logo img{
+        width: 50px;
+    }
+    
+    .box__footer .terms{
+        max-width: 100px;
+        margin-top: 2px;
+        font-weight: 300;
+        color: #7a7a7a;
+        font-size: 8px;
+    }
+    
+    .box__footer h2{
+        margin-bottom: 2px;
+        color: #ffffff;
+        font-weight: 500;
+        font-size: 8px;
+    }
+    
+    .box__footer a{
+        margin-top: 2px;
+        color: #7a7a7a;
+        font-weight: 300;
+        font-size: 9px;
+    }
+    
+    .box__footer a:hover{
+        opacity: 0.8;
+    }
+    
+    .box__footer a .fab{
+        width: 10px;
+        
+    }
+    .box__footer img{
+        width: 40px;
+    }
+    
+    .box__copyright{
+        max-width: 1200px;
+        margin: auto;
+        text-align: center;
+        padding: 0px 40px;
+    }
+    
+    .box__copyright p{
+        margin-top: 20px;
+        color: #7a7a7a;
+    }
+    
+    .box__copyright hr{
+        border: none;
+        height: 1px;
+        background-color: #7a7a7a;
+    }
+    
+  
 }
