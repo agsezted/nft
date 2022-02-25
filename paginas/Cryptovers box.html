@@ -1,184 +1,917 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    
-    <title>Compra NFT´s</title>
-    <link rel="shortcut icon" href="imagenes/short logo.png" type="image/x-icon">
-    <link rel="stylesheet" href="css/estilos.css">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Open+Sans&display=swap" rel="stylesheet">
-    <link href="https://unpkg.com/tailwindcss@^2/dist/tailwind.min.css" rel="stylesheet">
-    <script language="javascript" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-	<script language="javascript" type="text/javascript" src="web3.min.js"></script>
-	<script language="javascript" type="text/javascript" src="./cryptoversABI.js"></script>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>Compra NFT´s</title>
+  <link rel="shortcut icon" href="imagenes/short logo.png" type="image/x-icon">
+  <link rel="stylesheet" href="CSS/estilos.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Open+Sans&display=swap" rel="stylesheet">
+  <link href="https://unpkg.com/tailwindcss@^2/dist/tailwind.min.css" rel="stylesheet">
+  <script language="javascript" type="text/javascript"
+    src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/web3/1.7.1-rc.0/web3.min.js"
+    integrity="sha512-Ui9NE+/XdhwxssTrWetwWgpwpZJCLgTpB2dgkq+xe3O7lmZEJe+2rw3OT3YbYIUCQWH5dOO8ObLOYmbUVpPBgw=="
+    crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+  <script language="javascript" type="text/javascript" src="/cryptoversABI.js"></script>
+  <script language="javascript" type="text/javascript" src="/src/Crypto_vers.js"></script>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 </head>
+
 <body>
-	<div class="flex-col space-y-2 justify-center items-center">
-		<button id='loginButton' onclick="" class="mx-auto rounded-md p-2 bg-purple-500 text-white">
-		  Connect Wallet
-		</button>
-		<p id='userWallet' class='text-lg text-gray-600 my-2'></p>
-	  </div>
-	
-	  <script>
-		window.userWalletAddress = null
-		const loginButton = document.getElementById('loginButton')
-		const userWallet = document.getElementById('userWallet')
-	
-		function toggleButton() {
-		  if (!window.ethereum) {
-			loginButton.innerText = 'MetaMask is not installed'
-			loginButton.classList.remove('bg-purple-500', 'text-white')
-			loginButton.classList.add('bg-gray-500', 'text-gray-100', 'cursor-not-allowed')
-			return false
-		  }
-	
-		  loginButton.addEventListener('click', loginWithMetaMask)
-		}
-	
-		async function loginWithMetaMask() {
-		  const accounts = await window.ethereum.request({ method: 'eth_requestAccounts' })
-			.catch((e) => {
-			  console.error(e.message)
-			  return
-			})
-		  if (!accounts) { return }
-	
-		  window.userWalletAddress = accounts[0]
-		  userWallet.innerText = window.userWalletAddress
-		  loginButton.innerText = 'Connected'
-	
-		  loginButton.removeEventListener('click', loginWithMetaMask)
-		  setTimeout(() => {
-			loginButton.addEventListener('click', signOutOfMetaMask)
-		  }, 200)
-		}
-	
-		function signOutOfMetaMask() {
-		  window.userWalletAddress = null
-		  userWallet.innerText = ''
-		  loginButton.innerText = 'Connect Wallet'
-	
-		  loginButton.removeEventListener('click', signOutOfMetaMask)
-		  setTimeout(() => {
-			loginButton.addEventListener('click', loginWithMetaMask)
-		  }, 200)
-		}
-	
-		window.addEventListener('DOMContentLoaded', () => {
-		  toggleButton()
-		});
-	  </script>
-	
+	<div class="contenedor1">
+  <div class="flex-col space-y-2 justify-center items-center">
+    <button id='loginButton' onclick="" class="mx-auto rounded-md p-2 bg-purple-500 text-white">
+      Connect Wallet
+    </button>
+    <p id='userWallet' class='text-lg text-gray-600 my-2'></p>
+  </div>
 
-	<div id="txStatus"></div>
-		<script>
-			var cryptoversnft;
-			var userAccount;
-			function startApp(){
-				var cryptoversnftAddress = "0xaDB01BEC5a6A686333bf48E0090c5882F590b284";
-				cryptoversnft = new web3js.eth.Contract(cryptoversABI, cryptoversnftAddress);
+  <script>
+    window.userWalletAddress = null
+    const loginButton = document.getElementById('loginButton')
+    const userWallet = document.getElementById('userWallet')
+
+    function toggleButton() {
+      if (!window.ethereum) {
+        loginButton.innerText = 'MetaMask is not installed'
+        loginButton.classList.remove('bg-purple-500', 'text-white')
+        loginButton.classList.add('bg-gray-500', 'text-gray-100', 'cursor-not-allowed')
+        return false
+      }
+
+      loginButton.addEventListener('click', loginWithMetaMask)
+    }
+
+    async function loginWithMetaMask() {
+      const accounts = await window.ethereum.request({ method: 'eth_requestAccounts' })
+        .catch((e) => {
+          console.error(e.message)
+          return
+        })
+      if (!accounts) { return }
+
+      window.userWalletAddress = accounts[0]
+      userWallet.innerText = window.userWalletAddress
+      loginButton.innerText = 'Connected'
+
+      loginButton.removeEventListener('click', loginWithMetaMask)
+      setTimeout(() => {
+        loginButton.addEventListener('click', signOutOfMetaMask)
+      }, 200)
+    }
+
+    function signOutOfMetaMask() {
+      window.userWalletAddress = null
+      userWallet.innerText = ''
+      loginButton.innerText = 'Connect Wallet'
+
+      loginButton.removeEventListener('click', signOutOfMetaMask)
+      setTimeout(() => {
+        loginButton.addEventListener('click', loginWithMetaMask)
+      }, 200)
+    }
+
+    window.addEventListener('DOMContentLoaded', () => {
+      toggleButton()
+    });
+  </script>
+
+
+  <div id="txStatus"></div>
+  <script>
+    window.web3 = new Web3(ethereum)
+    var cryptoversnft;
+    var userAccount;
+    function startApp() {
+      // var cryptoversnftAddress = "0xE5b4c3Bafd9d21c1d06d7E47639573073A6223b1";
+      // cryptoversnft = new web3js.eth.Contract(cryptoversABI, cryptoversnftAddress);
+    }
+    function tokenOfOwner(tokensId) {
+      return cryptoversnft.methods.tokenOfOwner(tokensId).call
+    }
+    var accountInterval = setInterval(function () {
+      // Aquí se comprueba si la cuenta ha sido cambiada por otra
+      if (web3.eth.accounts[0] !== userAccount) {
+        userAccount = web3.eth.accounts[0];
+        // Si es así, llamamos una función para que actualize la UI
+        updateInterface();
+      }
+    }, 100);
+    function mintPresale(ORIGINS) {
+      // Como esto va a tardar un poco, vamos a actualizar la UI cuando la transacción
+      // se haya completado correctamente.
+      $("#txStatus").text("Creating new ORIGINS on the blockchain. This may take a while...");
+      // Enviar el texto a nuestro contrato:
+      
+      var cryptoversnftAddress = "0xaDB01BEC5a6A686333bf48E0090c5882F590b284";
+      var receiver_addr = '0xaDB01BEC5a6A686333bf48E0090c5882F590b284'
+	  var gas_limit = 250000;
+	  var Wei_cost = 12500000000000000;
+      let cryptoversABI = [
+	{
+		"anonymous": false,
+		"inputs": [
+			{
+				"indexed": true,
+				"internalType": "address",
+				"name": "owner",
+				"type": "address"
+			},
+			{
+				"indexed": true,
+				"internalType": "address",
+				"name": "approved",
+				"type": "address"
+			},
+			{
+				"indexed": true,
+				"internalType": "uint256",
+				"name": "tokenId",
+				"type": "uint256"
 			}
-			function tokenOfOwner(tokensId){
-				return cryptoversnft.methods.tokenOfOwner(tokensId).call
+		],
+		"name": "Approval",
+		"type": "event"
+	},
+	{
+		"anonymous": false,
+		"inputs": [
+			{
+				"indexed": true,
+				"internalType": "address",
+				"name": "owner",
+				"type": "address"
+			},
+			{
+				"indexed": true,
+				"internalType": "address",
+				"name": "operator",
+				"type": "address"
+			},
+			{
+				"indexed": false,
+				"internalType": "bool",
+				"name": "approved",
+				"type": "bool"
 			}
-			var accountInterval = setInterval(function() {
-  // Aquí se comprueba si la cuenta ha sido cambiada por otra
-  if (web3.eth.accounts[0] !== userAccount) {
-    userAccount = web3.eth.accounts[0];
-    // Si es así, llamamos una función para que actualize la UI
-    updateInterface();
-  }
-}, 100);
-function mintPresale(ORIGINS) {
-  // Como esto va a tardar un poco, vamos a actualizar la UI cuando la transacción
-  // se haya completado correctamente.
-  $("#txStatus").text("Creating new ORIGINS on the blockchain. This may take a while...");
-  // Enviar el texto a nuestro contrato:
-  return cryptoZombies.methods.mintPresale(ORIGINS)
-  .send({ from: userAccount, value: web3js.utils.toWei("0.0125", "ether")  })
-  .on("receipt", function(receipt) {
-    $("#txStatus").text("ORIGINS ARE SUCCESSFUL!");
-    // Si la transacción es aceptada por la blockchain, vamos a redibujar la UI
-    gettokenOfOwner(userAccount);
-  })
-  .on("error", function(error) {
-    // Si la transacción no se produce correctamente, vamos a mostrar por pantalla el error
-    $("#txStatus").text(error);
-  });
-}
-cryptoversnft.events.Transfer({ filter: { _to: userAccount } })
-        .on("data", function(event) {
-          let data = event.returnValues;
-          gettokenOfOwner(userAccount)
-        }).on("error", console.error);
-cryptoversnft.getPastEvents("ORIGINS", { fromBlock: 0, toBlock: "latest" })
-.then(function(events) {
-  // Este código nos dará una lista de cada ORIGINS que se haya creado
-});
-</script>
-    
-          <video autoplay loop  width="250px" height="250px">
-            <source src="./imagenes/ANIMACION PANDORA (video-converter.com).mp4" type="video/mp4">
-              tu navegador no es compatible con el video.
-          </video>
-          <select id="mintPresale" class="button">
-            <option value="2">2</option>
-            <option value="4">4</option>
-            <option value="8">8</option>
-            <option value="20">20</option>
-          </select>
-          
-          <button class="button" width="100px" height="100px" onclick="mintPresale()">
-            MINT
-          </button>
-        
-      <footer>
-        <div class="container__footer">
-            <div class="box__footer">
-                <div class="logo">
-                    <img src="./imagenes/logo redes-1.png" alt="">
-                </div>
-                <div class="terms">
-                    <p>Un juego pensado para la comunidad, buscando permanecer en el tiempo y aportar ideas innovadoras.</p>
-                </div>
-            </div>
-            <div class="box__footer">
-                <h2>Soluciones</h2>
-                <a href="https://www.google.com">App Desarrollo</a>
-                <a href="#">App Marketing</a>
-                <a href="#">IOS Desarrollo</a>
-                <a href="#">Android Desarrollo</a>
-            </div>
+		],
+		"name": "ApprovalForAll",
+		"type": "event"
+	},
+	{
+		"anonymous": false,
+		"inputs": [
+			{
+				"indexed": true,
+				"internalType": "address",
+				"name": "previousOwner",
+				"type": "address"
+			},
+			{
+				"indexed": true,
+				"internalType": "address",
+				"name": "newOwner",
+				"type": "address"
+			}
+		],
+		"name": "OwnershipTransferred",
+		"type": "event"
+	},
+	{
+		"anonymous": false,
+		"inputs": [
+			{
+				"indexed": true,
+				"internalType": "address",
+				"name": "from",
+				"type": "address"
+			},
+			{
+				"indexed": true,
+				"internalType": "address",
+				"name": "to",
+				"type": "address"
+			},
+			{
+				"indexed": true,
+				"internalType": "uint256",
+				"name": "tokenId",
+				"type": "uint256"
+			}
+		],
+		"name": "Transfer",
+		"type": "event"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "address",
+				"name": "to",
+				"type": "address"
+			},
+			{
+				"internalType": "uint256",
+				"name": "tokenId",
+				"type": "uint256"
+			}
+		],
+		"name": "approve",
+		"outputs": [],
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "uint256",
+				"name": "_amount",
+				"type": "uint256"
+			}
+		],
+		"name": "mintPresale",
+		"outputs": [],
+		"stateMutability": "payable",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "uint256",
+				"name": "_amount",
+				"type": "uint256"
+			}
+		],
+		"name": "mintReserved",
+		"outputs": [],
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "uint256",
+				"name": "_amount",
+				"type": "uint256"
+			}
+		],
+		"name": "mintToken",
+		"outputs": [],
+		"stateMutability": "payable",
+		"type": "function"
+	},
+	{
+		"inputs": [],
+		"name": "renounceOwnership",
+		"outputs": [],
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "address",
+				"name": "from",
+				"type": "address"
+			},
+			{
+				"internalType": "address",
+				"name": "to",
+				"type": "address"
+			},
+			{
+				"internalType": "uint256",
+				"name": "tokenId",
+				"type": "uint256"
+			}
+		],
+		"name": "safeTransferFrom",
+		"outputs": [],
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "address",
+				"name": "from",
+				"type": "address"
+			},
+			{
+				"internalType": "address",
+				"name": "to",
+				"type": "address"
+			},
+			{
+				"internalType": "uint256",
+				"name": "tokenId",
+				"type": "uint256"
+			},
+			{
+				"internalType": "bytes",
+				"name": "_data",
+				"type": "bytes"
+			}
+		],
+		"name": "safeTransferFrom",
+		"outputs": [],
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "address",
+				"name": "operator",
+				"type": "address"
+			},
+			{
+				"internalType": "bool",
+				"name": "approved",
+				"type": "bool"
+			}
+		],
+		"name": "setApprovalForAll",
+		"outputs": [],
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "string",
+				"name": "baseURI",
+				"type": "string"
+			}
+		],
+		"name": "setBaseURI",
+		"outputs": [],
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "bool",
+				"name": "val",
+				"type": "bool"
+			}
+		],
+		"name": "setPresaleActive",
+		"outputs": [],
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "uint256",
+				"name": "newPrice",
+				"type": "uint256"
+			}
+		],
+		"name": "setPrice",
+		"outputs": [],
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "bool",
+				"name": "val",
+				"type": "bool"
+			}
+		],
+		"name": "setSaleActive",
+		"outputs": [],
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "address",
+				"name": "from",
+				"type": "address"
+			},
+			{
+				"internalType": "address",
+				"name": "to",
+				"type": "address"
+			},
+			{
+				"internalType": "uint256",
+				"name": "tokenId",
+				"type": "uint256"
+			}
+		],
+		"name": "transferFrom",
+		"outputs": [],
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "address",
+				"name": "newOwner",
+				"type": "address"
+			}
+		],
+		"name": "transferOwnership",
+		"outputs": [],
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"inputs": [],
+		"stateMutability": "nonpayable",
+		"type": "constructor"
+	},
+	{
+		"inputs": [],
+		"name": "withdraw",
+		"outputs": [],
+		"stateMutability": "payable",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "address",
+				"name": "owner",
+				"type": "address"
+			}
+		],
+		"name": "balanceOf",
+		"outputs": [
+			{
+				"internalType": "uint256",
+				"name": "",
+				"type": "uint256"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"inputs": [],
+		"name": "baseTokenURI",
+		"outputs": [
+			{
+				"internalType": "string",
+				"name": "",
+				"type": "string"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "uint256",
+				"name": "tokenId",
+				"type": "uint256"
+			}
+		],
+		"name": "getApproved",
+		"outputs": [
+			{
+				"internalType": "address",
+				"name": "",
+				"type": "address"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "address",
+				"name": "owner",
+				"type": "address"
+			},
+			{
+				"internalType": "address",
+				"name": "operator",
+				"type": "address"
+			}
+		],
+		"name": "isApprovedForAll",
+		"outputs": [
+			{
+				"internalType": "bool",
+				"name": "",
+				"type": "bool"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"inputs": [],
+		"name": "MAX_MINT_PER_TX",
+		"outputs": [
+			{
+				"internalType": "uint256",
+				"name": "",
+				"type": "uint256"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"inputs": [],
+		"name": "MAX_PRESALE_SUPPLY",
+		"outputs": [
+			{
+				"internalType": "uint256",
+				"name": "",
+				"type": "uint256"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"inputs": [],
+		"name": "MAX_SUPPLY",
+		"outputs": [
+			{
+				"internalType": "uint256",
+				"name": "",
+				"type": "uint256"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"inputs": [],
+		"name": "name",
+		"outputs": [
+			{
+				"internalType": "string",
+				"name": "",
+				"type": "string"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"inputs": [],
+		"name": "owner",
+		"outputs": [
+			{
+				"internalType": "address",
+				"name": "",
+				"type": "address"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "uint256",
+				"name": "tokenId",
+				"type": "uint256"
+			}
+		],
+		"name": "ownerOf",
+		"outputs": [
+			{
+				"internalType": "address",
+				"name": "",
+				"type": "address"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"inputs": [],
+		"name": "presaleActive",
+		"outputs": [
+			{
+				"internalType": "bool",
+				"name": "",
+				"type": "bool"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"inputs": [],
+		"name": "price",
+		"outputs": [
+			{
+				"internalType": "uint256",
+				"name": "",
+				"type": "uint256"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"inputs": [],
+		"name": "reserved",
+		"outputs": [
+			{
+				"internalType": "uint256",
+				"name": "",
+				"type": "uint256"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"inputs": [],
+		"name": "saleActive",
+		"outputs": [
+			{
+				"internalType": "bool",
+				"name": "",
+				"type": "bool"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "bytes4",
+				"name": "interfaceId",
+				"type": "bytes4"
+			}
+		],
+		"name": "supportsInterface",
+		"outputs": [
+			{
+				"internalType": "bool",
+				"name": "",
+				"type": "bool"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"inputs": [],
+		"name": "symbol",
+		"outputs": [
+			{
+				"internalType": "string",
+				"name": "",
+				"type": "string"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "uint256",
+				"name": "index",
+				"type": "uint256"
+			}
+		],
+		"name": "tokenByIndex",
+		"outputs": [
+			{
+				"internalType": "uint256",
+				"name": "",
+				"type": "uint256"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "address",
+				"name": "owner",
+				"type": "address"
+			},
+			{
+				"internalType": "uint256",
+				"name": "index",
+				"type": "uint256"
+			}
+		],
+		"name": "tokenOfOwnerByIndex",
+		"outputs": [
+			{
+				"internalType": "uint256",
+				"name": "",
+				"type": "uint256"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "address",
+				"name": "addr",
+				"type": "address"
+			}
+		],
+		"name": "tokensOfOwner",
+		"outputs": [
+			{
+				"internalType": "uint256[]",
+				"name": "",
+				"type": "uint256[]"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "uint256",
+				"name": "tokenId",
+				"type": "uint256"
+			}
+		],
+		"name": "tokenURI",
+		"outputs": [
+			{
+				"internalType": "string",
+				"name": "",
+				"type": "string"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"inputs": [],
+		"name": "totalSupply",
+		"outputs": [
+			{
+				"internalType": "uint256",
+				"name": "",
+				"type": "uint256"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"inputs": [],
+		"name": "whitelistActive",
+		"outputs": [
+			{
+				"internalType": "bool",
+				"name": "",
+				"type": "bool"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "address",
+				"name": "",
+				"type": "address"
+			}
+		],
+		"name": "whitelistReserved",
+		"outputs": [
+			{
+				"internalType": "uint256",
+				"name": "",
+				"type": "uint256"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	}
+]
 
-            <div class="box__footer">
-                <h2>Compañia</h2>
-                <a href="#">Acerca de</a>
-                <a href="#">Trabajos</a>
-                <a href="#">Procesos</a>
-                <a href="#">Servicios</a>              
-            </div>
+      //let packval = Web3.utils.toWei('18', "ether");
+      let packval = "118000000000000000";
+      let web3 = new Web3(window.ethereum);
 
-            <div class="box__footer">
-                <h2>Redes Sociales</h2>
-                <a href="https://discord.gg/7AKRyfQvBp"> <i class="fab fa-discord"></i> <img src="./imagenes/Discord-logo.png" width="100px" alt=""></a>
-                <a href="https://twitter.com/cryptovers_nft"><i class="fab fa-twitter-square"></i> <img src="./imagenes/logotipo-twitter.png" width="100px" alt=""></a>
-                <a href="https://t.me/+AOUVhQ2fktRkNWZh"><i class="fab fa-telegram"></i> <img src="./imagenes/Telegram-Symbol.png" width="100px" alt=""></a>
-                <a href="@cryptoversnft"><i class="fab fa-instagram-square"></i> <img src="./imagenes/intagram.png" width="100px" alt=""></a>
-            </div>
+      let instance = new web3.eth.Contract(cryptoversABI, cryptoversnftAddress, gas_limit);
 
+     
+
+      web3.eth.sendTransaction({
+        from: userWalletAddress, //Users Connected wallet address
+        to: cryptoversnftAddress,  //BUSD smart contract address
+        value: 2,
+      })
+        .on("transactionHash", (hash) => {
+          console.log("Transaction hash", hash);
+          alert("Transaction Success");
+          waitpayment = false;
+        })
+        .on("receipt", (receipt) => {
+          console.log("Receipt: ", receipt);
+        })
+        .on("error", (error) => {
+          console.log(error);
+          waitpayment = false;
+          alert("Transaction Cancelled");
+        });
+    }
+    // cryptoversnft.events.Transfer({ filter: { _to: userAccount } })
+    //   .on("data", function (event) {
+    //     let data = event.returnValues;
+    //     gettokenOfOwner(userAccount)
+    //   }).on("error", console.error);
+    // cryptoversnft.getPastEvents("ORIGINS", { fromBlock: 0, toBlock: "latest" })
+    //   .then(function (events) {
+    //     // Este código nos dará una lista de cada ORIGINS que se haya creado
+    //   });
+  </script>
+
+  <video autoplay loop width="250px" height="250px">
+    <source src="./imagenes/ANIMACION PANDORA (video-converter.com).mp4" type="video/mp4">
+    tu navegador no es compatible con el video.
+  </video>
+  <select id="mintPresale" class="button">
+    <option value="2">2</option>
+    <option value="4">4</option>
+    <option value="8">8</option>
+    <option value="20">20</option>
+  </select>
+
+  <button class="button" width="100px" height="100px" onclick="mintPresale()">
+    MINT
+  </button>
+
+  <footer>
+    <div class="container__footer">
+      <div class="box__footer">
+        <div class="logo">
+          <img src="./imagenes/logo redes-1.png" alt="">
         </div>
-
-        <div class="box__copyright">
-            <hr>
-            <p>Todos los derechos reservados © 2022 <b>&copy; Cryptovers</b></p>
+        <div class="terms">
+          <p>Un juego pensado para la comunidad, buscando permanecer en el tiempo y aportar ideas innovadoras.</p>
         </div>
-    </footer>
-    
+      </div>
+      <div class="box__footer">
+        <h2>Soluciones</h2>
+        <a href="https://www.google.com">App Desarrollo</a>
+        <a href="#">App Marketing</a>
+        <a href="#">IOS Desarrollo</a>
+        <a href="#">Android Desarrollo</a>
+      </div>
+
+      <div class="box__footer">
+        <h2>Compañia</h2>
+        <a href="#">Acerca de</a>
+        <a href="#">Trabajos</a>
+        <a href="#">Procesos</a>
+        <a href="#">Servicios</a>
+      </div>
+
+      <div class="box__footer">
+        <h2>Redes Sociales</h2>
+        <a href="https://discord.gg/7AKRyfQvBp"> <i class="fab fa-discord"></i> <img src="./imagenes/Discord-logo.png"
+            width="100px" alt=""></a>
+        <a href="https://twitter.com/cryptovers_nft"><i class="fab fa-twitter-square"></i> <img
+            src="./imagenes/logotipo-twitter.png" width="100px" alt=""></a>
+        <a href="https://t.me/+AOUVhQ2fktRkNWZh"><i class="fab fa-telegram"></i> <img
+            src="./imagenes/Telegram-Symbol.png" width="100px" alt=""></a>
+        <a href="@cryptoversnft"><i class="fab fa-instagram-square"></i> <img src="./imagenes/intagram.png"
+            width="100px" alt=""></a>
+      </div>
+
+    </div>
+
+    <div class="box__copyright">
+      <hr>
+      <p>Todos los derechos reservados © 2022 <b>&copy; Cryptovers</b></p>
+    </div>
+  </footer>
+</div>
+
 </body>
 
 </html>
