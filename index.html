@@ -1,218 +1,201 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 
 <head>
-  <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-  <title>Compra NFT´s</title>
-  <link rel="shortcut icon" href="imagenes/short logo.png" type="image/x-icon">
-  <link rel="stylesheet" href="CSS/estilos.css">
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Open+Sans&display=swap" rel="stylesheet">
-  <link href="https://unpkg.com/tailwindcss@^2/dist/tailwind.min.css" rel="stylesheet">
-  <script language="javascript" type="text/javascript"
-    src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/web3/1.7.1-rc.0/web3.min.js"
-    integrity="sha512-Ui9NE+/XdhwxssTrWetwWgpwpZJCLgTpB2dgkq+xe3O7lmZEJe+2rw3OT3YbYIUCQWH5dOO8ObLOYmbUVpPBgw=="
-    crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-  <script language="javascript" type="text/javascript" src="./cryptoversABI.js"></script>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cryptovers</title>
+    <link rel="shortcut icon" href="imagenes/short logo.png" type="image/x-icon">
+    <link rel="stylesheet" href="css/estilos.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+ <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+ <link href="https://fonts.googleapis.com/css2?family=Open+Sans&display=swap" rel="stylesheet">
+ <meta name="viewport" content="width=device-width, initial-scale=1.0">
 </head>
-
 <body>
-  <div class="flex-col space-y-2 justify-center items-center">
-    <button id='loginButton' onclick="" class="mx-auto rounded-md p-2 bg-purple-500 text-white">
-      Connect Wallet
-    </button>
-    <p id='userWallet' class='text-lg text-gray-600 my-2'></p>
-  </div>
+    <div class="contenedor1">
+    <header>
+        <nav>
+            <a href="#">Inicio</a>
+            <a href="./paginas/Cryptovers box.html">Cryptovers BOX</a>                          
+            <a href="./paginas/Inventario.html">Inventario</a>
+            <a href="./paginas/marketplace.html">Marketplace</a>
+            <a href="https://cryptovers.gitbook.io/cryptovers/">Whitepaper</a>
+        </nav>
+        <section class="textos-header">
+            <h1>CRYPTOVERS</h1>
+            <H2>El juego play to earn con vision de mejorar el ecosistema Cripto.
+            </H2>
+            <h3>Mira nuestro video informativo⬇️</h3>
+            <video autoplay loop >
+                <source src="./imagenes/entrevista.mp4" type="video/mp4">
+                tu navegador no es compatible con el video.
+              </video>
 
-  <script>
-    window.userWalletAddress = null
-    const loginButton = document.getElementById('loginButton')
-    const userWallet = document.getElementById('userWallet')
+        </section>
 
-    function toggleButton() {
-      if (!window.ethereum) {
-        loginButton.innerText = 'MetaMask is not installed'
-        loginButton.classList.remove('bg-purple-500', 'text-white')
-        loginButton.classList.add('bg-gray-500', 'text-gray-100', 'cursor-not-allowed')
-        return false
-      }
-
-      loginButton.addEventListener('click', loginWithMetaMask)
-    }
-
-    async function loginWithMetaMask() {
-      const accounts = await window.ethereum.request({ method: 'eth_requestAccounts' })
-        .catch((e) => {
-          console.error(e.message)
-          return
-        })
-      if (!accounts) { return }
-
-      window.userWalletAddress = accounts[0]
-      userWallet.innerText = window.userWalletAddress
-      loginButton.innerText = 'Connected'
-
-      loginButton.removeEventListener('click', loginWithMetaMask)
-      setTimeout(() => {
-        loginButton.addEventListener('click', signOutOfMetaMask)
-      }, 200)
-    }
-
-    function signOutOfMetaMask() {
-      window.userWalletAddress = null
-      userWallet.innerText = ''
-      loginButton.innerText = 'Connect Wallet'
-
-      loginButton.removeEventListener('click', signOutOfMetaMask)
-      setTimeout(() => {
-        loginButton.addEventListener('click', loginWithMetaMask)
-      }, 200)
-    }
-
-    window.addEventListener('DOMContentLoaded', () => {
-      toggleButton()
-    });
-  </script>
-
-
-  <div id="txStatus"></div>
-  <script>
-    window.web3 = new Web3(ethereum)
-    var cryptoversnft;
-    var userAccount;
-    var value;
-    function startApp() {
-      // var cryptoversnftAddress = "0xE5b4c3Bafd9d21c1d06d7E47639573073A6223b1";
-      // cryptoversnft = new web3js.eth.Contract(cryptoversABI, cryptoversnftAddress);
-    }
-    function tokenOfOwner(tokensId) {
-      return cryptoversnft.methods.tokenOfOwner(tokensId).call
-    }
-    var accountInterval = setInterval(function () {
-      // Aquí se comprueba si la cuenta ha sido cambiada por otra
-      if (web3.eth.accounts[0] !== userAccount) {
-        userAccount = web3.eth.accounts[0];
-        // Si es así, llamamos una función para que actualize la UI
-        updateInterface();
-      }
-    }, 100);
-    function mintPresale(ORIGINS) {
-      // Como esto va a tardar un poco, vamos a actualizar la UI cuando la transacción
-      // se haya completado correctamente.
-      $("#txStatus").text("Creating new ORIGINS on the blockchain. This may take a while...");
-      // Enviar el texto a nuestro contrato:
-      
-      var cryptoversnftAddress = "0xaDB01BEC5a6A686333bf48E0090c5882F590b284";
-      var receiver_addr = '0xB8c77482e45F1F44dE1745F52C74426C631bDD52';
-      var value = "";
-      let cryptoversABI = [{ "inputs": [], "payable": false, "stateMutability": "nonpayable", "type": "constructor" }, { "anonymous": false, "inputs": [{ "indexed": true, "internalType": "address", "name": "owner", "type": "address" }, { "indexed": true, "internalType": "address", "name": "spender", "type": "address" }, { "indexed": false, "internalType": "uint256", "name": "value", "type": "uint256" }], "name": "Approval", "type": "event" }, { "anonymous": false, "inputs": [{ "indexed": true, "internalType": "address", "name": "previousOwner", "type": "address" }, { "indexed": true, "internalType": "address", "name": "newOwner", "type": "address" }], "name": "OwnershipTransferred", "type": "event" }, { "anonymous": false, "inputs": [{ "indexed": true, "internalType": "address", "name": "from", "type": "address" }, { "indexed": true, "internalType": "address", "name": "to", "type": "address" }, { "indexed": false, "internalType": "uint256", "name": "value", "type": "uint256" }], "name": "Transfer", "type": "event" }, { "constant": true, "inputs": [], "name": "_decimals", "outputs": [{ "internalType": "uint8", "name": "", "type": "uint8" }], "payable": false, "stateMutability": "view", "type": "function" }, { "constant": true, "inputs": [], "name": "_name", "outputs": [{ "internalType": "string", "name": "", "type": "string" }], "payable": false, "stateMutability": "view", "type": "function" }, { "constant": true, "inputs": [], "name": "_symbol", "outputs": [{ "internalType": "string", "name": "", "type": "string" }], "payable": false, "stateMutability": "view", "type": "function" }, { "constant": true, "inputs": [{ "internalType": "address", "name": "owner", "type": "address" }, { "internalType": "address", "name": "spender", "type": "address" }], "name": "allowance", "outputs": [{ "internalType": "uint256", "name": "", "type": "uint256" }], "payable": false, "stateMutability": "view", "type": "function" }, { "constant": false, "inputs": [{ "internalType": "address", "name": "spender", "type": "address" }, { "internalType": "uint256", "name": "amount", "type": "uint256" }], "name": "approve", "outputs": [{ "internalType": "bool", "name": "", "type": "bool" }], "payable": false, "stateMutability": "nonpayable", "type": "function" }, { "constant": true, "inputs": [{ "internalType": "address", "name": "account", "type": "address" }], "name": "balanceOf", "outputs": [{ "internalType": "uint256", "name": "", "type": "uint256" }], "payable": false, "stateMutability": "view", "type": "function" }, { "constant": false, "inputs": [{ "internalType": "uint256", "name": "amount", "type": "uint256" }], "name": "burn", "outputs": [{ "internalType": "bool", "name": "", "type": "bool" }], "payable": false, "stateMutability": "nonpayable", "type": "function" }, { "constant": true, "inputs": [], "name": "decimals", "outputs": [{ "internalType": "uint8", "name": "", "type": "uint8" }], "payable": false, "stateMutability": "view", "type": "function" }, { "constant": false, "inputs": [{ "internalType": "address", "name": "spender", "type": "address" }, { "internalType": "uint256", "name": "subtractedValue", "type": "uint256" }], "name": "decreaseAllowance", "outputs": [{ "internalType": "bool", "name": "", "type": "bool" }], "payable": false, "stateMutability": "nonpayable", "type": "function" }, { "constant": true, "inputs": [], "name": "getOwner", "outputs": [{ "internalType": "address", "name": "", "type": "address" }], "payable": false, "stateMutability": "view", "type": "function" }, { "constant": false, "inputs": [{ "internalType": "address", "name": "spender", "type": "address" }, { "internalType": "uint256", "name": "addedValue", "type": "uint256" }], "name": "increaseAllowance", "outputs": [{ "internalType": "bool", "name": "", "type": "bool" }], "payable": false, "stateMutability": "nonpayable", "type": "function" }, { "constant": false, "inputs": [{ "internalType": "uint256", "name": "amount", "type": "uint256" }], "name": "mint", "outputs": [{ "internalType": "bool", "name": "", "type": "bool" }], "payable": false, "stateMutability": "nonpayable", "type": "function" }, { "constant": true, "inputs": [], "name": "name", "outputs": [{ "internalType": "string", "name": "", "type": "string" }], "payable": false, "stateMutability": "view", "type": "function" }, { "constant": true, "inputs": [], "name": "owner", "outputs": [{ "internalType": "address", "name": "", "type": "address" }], "payable": false, "stateMutability": "view", "type": "function" }, { "constant": false, "inputs": [], "name": "renounceOwnership", "outputs": [], "payable": false, "stateMutability": "nonpayable", "type": "function" }, { "constant": true, "inputs": [], "name": "symbol", "outputs": [{ "internalType": "string", "name": "", "type": "string" }], "payable": false, "stateMutability": "view", "type": "function" }, { "constant": true, "inputs": [], "name": "totalSupply", "outputs": [{ "internalType": "uint256", "name": "", "type": "uint256" }], "payable": false, "stateMutability": "view", "type": "function" }, { "constant": false, "inputs": [{ "internalType": "address", "name": "recipient", "type": "address" }, { "internalType": "uint256", "name": "amount", "type": "uint256" }], "name": "transfer", "outputs": [{ "internalType": "bool", "name": "", "type": "bool" }], "payable": false, "stateMutability": "nonpayable", "type": "function" }, { "constant": false, "inputs": [{ "internalType": "address", "name": "sender", "type": "address" }, { "internalType": "address", "name": "recipient", "type": "address" }, { "internalType": "uint256", "name": "amount", "type": "uint256" }], "name": "transferFrom", "outputs": [{ "internalType": "bool", "name": "", "type": "bool" }], "payable": false, "stateMutability": "nonpayable", "type": "function" }, { "constant": false, "inputs": [{ "internalType": "address", "name": "newOwner", "type": "address" }], "name": "transferOwnership", "outputs": [], "payable": false, "stateMutability": "nonpayable", "type": "function" }]
-      var gaslimit = 25000
-      //let gaslimit = "";
-      //let packval = Web3.utils.toWei('', "ether");
-      let packval = 2;
-      let web3 = new Web3(window.ethereum);
-
-      let instance = new web3.eth.Contract(cryptoversABI, cryptoversnftAddress);
-
-      let data = instance.methods.transfer(receiver_addr, packval.toString()).encodeABI();
-
-      web3.eth.sendTransaction({
-        from: userWalletAddress, //Users Connected wallet address
-        to: cryptoversnftAddress,  //BUSD smart contract address
-        data: data,
-        value: '25000',
-      })
-        .on("transactionHash", (hash) => {
-          console.log("Transaction hash", hash);
-          alert("Transaction Success");
-          waitpayment = false;
-        })
-        .on("receipt", (receipt) => {
-          console.log("Receipt: ", receipt);
-        })
-        .on("error", (error) => {
-          console.log(error);
-          waitpayment = false;
-          alert("Transaction Cancelled");
-        });
-    }
-    cryptoversnft.events.Transfer({ filter: { _to: userAccount } })
-       .on("data", function (event) {
-        let data = event.returnValues;
-        gettokenOfOwner(userAccount)
-      }).on("error", console.error);
-     cryptoversnft.getPastEvents("ORIGINS", { fromBlock: 0, toBlock: "latest" })
-       .then(function (events) {
-         // Este código nos dará una lista de cada ORIGINS que se haya creado
-       });
-  </script>
-
-  <video autoplay loop width="250px" height="250px">
-    <source src="./imagenes/ANIMACION PANDORA (video-converter.com).mp4" type="video/mp4">
-    tu navegador no es compatible con el video.
-  </video>
-  <select id="mintPresale" class="button">
-    <option value="2">2</option>
-    <option value="4">4</option>
-    <option value="8">8</option>
-    <option value="20">20</option>
-  </select>
-
-  <button class="button" width="100px" height="100px" onclick="mintPresale()">
-    MINT
-  </button>
-
-  <footer>
-    <div class="container__footer">
-      <div class="box__footer">
-        <div class="logo">
-          <img src="./imagenes/logo redes-1.png" alt="">
+        <div class="wave" style="height: 150px; overflow: hidden;">
+            <svg viewBox="0 0 500 150" preserveAspectRatio="none" style="height: 100%; width: 100%;">
+                <path d="M0.00,49.98 C150.00,150.00 349.20,-49.98 500.00,49.98 L500.00,150.00 L0.00,150.00 Z"
+                    style="stroke: none; fill: hsla(0, 0%, 0%, 0.082);">
+                </path>
+            </svg>
         </div>
-        <div class="terms">
-          <p>Un juego pensado para la comunidad, buscando permanecer en el tiempo y aportar ideas innovadoras.</p>
-        </div>
-      </div>
-      <div class="box__footer">
-        <h2>Soluciones</h2>
-        <a href="https://www.google.com">App Desarrollo</a>
-        <a href="#">App Marketing</a>
-        <a href="#">IOS Desarrollo</a>
-        <a href="#">Android Desarrollo</a>
-      </div>
-
-      <div class="box__footer">
-        <h2>Compañia</h2>
-        <a href="#">Acerca de</a>
-        <a href="#">Trabajos</a>
-        <a href="#">Procesos</a>
-        <a href="#">Servicios</a>
-      </div>
-
-      <div class="box__footer">
-        <h2>Redes Sociales</h2>
-        <a href="https://discord.gg/7AKRyfQvBp"> <i class="fab fa-discord"></i> <img src="./imagenes/Discord-logo.png"
-            width="100px" alt=""></a>
-        <a href="https://twitter.com/cryptovers_nft"><i class="fab fa-twitter-square"></i> <img
-            src="./imagenes/logotipo-twitter.png" width="100px" alt=""></a>
-        <a href="https://t.me/+AOUVhQ2fktRkNWZh"><i class="fab fa-telegram"></i> <img
-            src="./imagenes/Telegram-Symbol.png" width="100px" alt=""></a>
-        <a href="@cryptoversnft"><i class="fab fa-instagram-square"></i> <img src="./imagenes/intagram.png"
-            width="100px" alt=""></a>
-      </div>
-
-    </div>
-
-    <div class="box__copyright">
-      <hr>
-      <p>Todos los derechos reservados © 2022 <b>&copy; Cryptovers</b></p>
-    </div>
-  </footer>
-
+        <MAIN>
+            <section class="contenedor sobre-nosotros">
+                <h2 class="titulo">Ejemplo del Juego</h2>
+                <div class="contenedor-sobre-nosotros">
+                    <img src="./imagenes/flayer de batalla 3.jpg" alt="" width="80px" height="600px" class="imagen-about-us">
+                    <div class="contenido-textos">
+                        <h3><span>1-</span> Modo de Juego</h3>
+                        <p>Este juego en particular lo podrás jugar con un sistema de habilidades por ataque, defensa, ganar energía y Ataque Especial. Dando así un plus de estrategia en el cual deberás calcular muy bien tus movimientos a la hora de gastar las energías:
+                            Cada ronda contará con 2 energías por turno, donde cada acción gastará 1 energía.  
+                            Cada movimiento contará como una energía gastada, a excepción de ahorro de energía que sumará una energía más las que ya posee.
+                            Estas energías las podrá distribuir entre los personajes, dando órdenes específicas a cada personaje de Ataque o Defensa, en el caso  del Ataque Especial se gastarán 2 energías para así debilitar 2 de vida o en su caso que el adversario posea escudo quitarle el escudo y disminuir 1 de vida.
+                            Así que prepárate y arma tu mejor estrategia para vencer a tus adversarios.</p>
+                        
+                        <h3><span>2-</span> Modalidad PVE</h3>
+                        <p>En el modo aventura dependiendo de cuantos personajes poseas le serán asignadas las recompensas.
+                            Dicho modo esta diseñado para la cantidad de 2 a 4 personajes por aventura diaria.
+                            Cada día se podrá realizar solo 5 aventuras.
+                            Las ganancias dependen de la rareza del personaje dándole así de esta forma un plus a cada rareza:
+                            común: 0.03
+                            Raro: 0.06
+                            Legendario: 0.10 
+                            Místico: 0.15
+                            Cada personaje añadirá su valor al total de ganancia del equipo por cada partida jugada. </p>
+                        
+                    </div>
+                   <h4></h4>
+                </div>
+                <section class="Inventario">
+                    <div class="contenedor">
+                        <h2 class="titulo">NFT´s</h2>
+                        <div class="galeria-port">
+                            <div class="imagen-port">
+                                <img src="./imagenes/97055.png" alt="">
+                                <div class="hover-galeria">
+                                    <img src="./imagenes/logo redes-1.png" alt="">
+                                    <p></p>
+                                </div>
+                            </div>
+                            <div class="imagen-port">
+                                <img src="./imagenes/652.png" alt="">
+                                <div class="hover-galeria">
+                                    <img src="./imagenes/logo redes-1.png" alt="">
+                                    <p></p>
+                                </div>
+                            </div>
+                            <div class="imagen-port">
+                                <img src="./imagenes/637.png" alt="">
+                                <div class="hover-galeria">
+                                    <img src="./imagenes/logo redes-1.png" alt="">
+                                    <p></p>
+                                </div>
+                            </div>
+                            <div class="imagen-port">
+                                <img src="./imagenes/631.png" alt="">
+                                <div class="hover-galeria">
+                                    <img src="./imagenes/logo redes-1.png" alt="">
+                                    <p></p>
+                                </div>
+                            </div>
+                            <h5>Esta coleccion de NFTs esta pensada para creacion del juego, desarrollo de una granja 
+                                de minera de bitcoin y crear un lugar en el metaverso, todo esto por decision de los
+                                poseedores de los NFTs, diviertete jugando y al mismo tiempo obteniendo recompensas.
+                            </h5>
+                        </div>
+                    </div>
+                    
+                </section>
+                <section class="clientes-contenedor">
+                    <h2 class="titulo">Equipo</h2>
+                    <div class="cards">
+                        <div class="card">
+                            <img src="./imagenes/alberto.jpeg" alt="">
+                            <div class="contenido-texto-card">
+                                <h4>Alberto Soto</h4>
+                                <p>CEO/DEV/ART: Ha sido un gran y exasusto trabajo al cual le hemos dedicado horas de Desarrollo
+                                    para obtener un resultado satisfactorio, nos falta mucho por recorer, pero con el apoyo
+                                    de cada una de las personas de nuestra comunidad saldremos adelante con este proyecto. </p>
+                            </div>
+                        </div>
+                        <div class="card">
+                            <img src="./imagenes/foto lino.png" alt="">
+                            <div class="contenido-texto-card">
+                                <h4>Lino Colmenarez</h4>
+                                <p>CO-FOUNDER/REDACTOR/COMUNITY-MANAGER: Detras de un gran proyecto hay personas con grandes 
+                                    ideas!... Siempre estaremos en fas de crear cosas que ayuden a la comunidad.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="salo">
+                        <img src="./imagenes/salo.jpeg" alt="">
+                        <div class="contenido-texto-card">
+                            <h4>Salomon Paz</h4>
+                            <p>Co-Founder/Investor: Creemos en el crecimiento exponencial del proyecto sabiendo, que desde
+                                un comienzo no iba hacer facil, pero siempre teniendo un enfoque claro, mucha determinacion
+                                y trabajo duro, lograriamos tener un proyecto inigualable a otro, teniendo siempre en cuenta
+                                a cada uno de nuestros inversores.
+                            </p>
+                        </div>
+                    </div>
+                </section>
+                <section class="Tecnologia">
+                    <div class="contenedor">
+                        <h2 class="titulo">Tecnologias Usadas</h2>
+                        <div class="servicio cont">
+                            <div class="tecnologias">
+                                <img src="./imagenes/binance.png" width="350px" height="200px" alt="">
+                            </div>
+                            <div class="tecnologias">
+                                <img src="./imagenes/metamask.png" width="350px" height="200px" alt="">
+                            </div>
+                        </div>
+                    </div>
+                </section>
+        </MAIN>
+        <footer>
+            <div class="container__footer">
+                <div class="box__footer">
+                    <div class="logo">
+                        <img src="./imagenes/logo redes-1.png" alt="">
+                    </div>
+                    <div class="terms">
+                        <p>Un juego pensado para la comunidad, buscando permanecer en el tiempo y aportar ideas innovadoras.</p>
+                    </div>
+                </div>
+                <div class="box__footer">
+                    <h2>Soluciones</h2>
+                    <a href="https://www.google.com">App Desarrollo</a>
+                    <a href="#">App Marketing</a>
+                    <a href="#">IOS Desarrollo</a>
+                    <a href="#">Android Desarrollo</a>
+                </div>
+                <div class="box__footer">
+                    <h2>Compañia</h2>
+                    <a href="#">Acerca de</a>
+                    <a href="#">Trabajos</a>
+                    <a href="#">Procesos</a>
+                    <a href="#">Servicios</a>              
+                </div>
+                <div class="box__footer">
+                    <h2>Redes Sociales</h2>
+                    <a href="https://discord.gg/7AKRyfQvBp"> <i class="fab fa-discord"></i> <img src="./imagenes/Discord-logo.png" width="100px" alt=""></a>
+                    <a href="https://twitter.com/cryptovers_nft"><i class="fab fa-twitter-square"></i> <img src="./imagenes/logotipo-twitter.png" width="100px" alt=""></a>
+                    <a href="https://t.me/+AOUVhQ2fktRkNWZh"><i class="fab fa-telegram"></i> <img src="./imagenes/Telegram-Symbol.png" width="100px" alt=""></a>
+                    <a href="@cryptoversnft"><i class="fab fa-instagram-square"></i> <img src="./imagenes/intagram.png" width="100px" alt=""></a>
+                </div>
+            </div>
+            <div class="box__copyright">
+                <hr>
+                <p>Todos los derechos reservados © 2022 <b>&copy; Cryptovers</b></p>
+            </div>
+        </footer>
+    </header>
+</div>
 </body>
 
 </html>
